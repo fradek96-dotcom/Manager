@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manager</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="app-header">
+        <div>
+          <h1>Manager</h1>
+          <p class="subtitle">Moderní workspace pro Tasks a Projects</p>
+        </div>
+        <div class="header-stats">
+          <span class="stat-chip">Aktivní tasks: <strong id="stat-active-tasks">0</strong></span>
+          <span class="stat-chip">Aktivní projects: <strong id="stat-active-projects">0</strong></span>
+          <button id="reset-storage" class="danger-button" type="button">Vymazat vše</button>
+        </div>
+      </header>
+
+      <nav class="tabs" aria-label="Hlavní sekce">
+        <button class="tab-button is-active" type="button" data-tab="tasks">Tasks</button>
+        <button class="tab-button" type="button" data-tab="projects">Projects</button>
+      </nav>
+
+      <main>
+        <section class="panel is-visible" id="tasks-panel">
+          <div class="panel-header">
+            <h2>Tasks</h2>
+            <div class="view-toggle" role="tablist" aria-label="Task view mode">
+              <button class="view-button is-active" type="button" data-kind="tasks" data-view="active">Aktivní</button>
+              <button class="view-button" type="button" data-kind="tasks" data-view="resolved">Vyřešené</button>
+            </div>
+          </div>
+
+          <form id="task-form" class="form-grid">
+            <label>
+              Název úkolu
+              <input name="title" type="text" maxlength="120" placeholder="Např. Připravit sprint plán" required />
+            </label>
+
+            <label>
+              Priorita
+              <select name="priority">
+                <option value="low">Low</option>
+                <option value="medium" selected>Medium</option>
+                <option value="high">High</option>
+              </select>
+            </label>
+
+            <label>
+              Plánování
+              <input name="plannedDate" type="date" />
+            </label>
+
+            <label class="full-width">
+              Poznámky
+              <textarea name="notes" rows="3" maxlength="500" placeholder="Detaily, kontext, checklist..."></textarea>
+            </label>
+
+            <div class="full-width form-footer">
+              <button type="submit" class="primary-button">Přidat task</button>
+            </div>
+          </form>
+
+          <div class="filters filters-grid">
+            <label>
+              Filtr priority
+              <select id="task-priority-filter">
+                <option value="all">Vše</option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+              </select>
+            </label>
+
+            <label>
+              Hledat task
+              <input id="task-search" type="search" placeholder="Hledej podle názvu/poznámek" />
+            </label>
+
+            <div class="filter-actions">
+              <button id="clear-resolved-tasks" class="secondary-button" type="button">Vymazat vyřešené tasks</button>
+            </div>
+          </div>
+
+          <ul id="task-list" class="card-list"></ul>
+        </section>
+
+        <section class="panel" id="projects-panel">
+          <div class="panel-header">
+            <h2>Projects</h2>
+            <div class="view-toggle" role="tablist" aria-label="Project view mode">
+              <button class="view-button is-active" type="button" data-kind="projects" data-view="active">Aktivní</button>
+              <button class="view-button" type="button" data-kind="projects" data-view="resolved">Vyřešené</button>
+            </div>
+          </div>
+
+          <form id="project-form" class="form-grid">
+            <label>
+              Název projektu
+              <input name="name" type="text" maxlength="120" placeholder="Např. Redesign klientského portálu" required />
+            </label>
+
+            <label class="full-width">
+              Poznámky
+              <textarea name="notes" rows="3" maxlength="700" placeholder="Cíl projektu, scope, rizika..."></textarea>
+            </label>
+
+            <div class="full-width form-footer">
+              <button type="submit" class="primary-button">Přidat project</button>
+            </div>
+          </form>
+
+          <div class="filters filters-grid">
+            <label>
+              Hledat project
+              <input id="project-search" type="search" placeholder="Hledej podle názvu/poznámek" />
+            </label>
+
+            <div class="filter-actions">
+              <button id="clear-resolved-projects" class="secondary-button" type="button">Vymazat vyřešené projects</button>
+            </div>
+          </div>
+
+          <ul id="project-list" class="card-list"></ul>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
